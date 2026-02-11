@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xiaomi-Robotics-0</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        'mi-sans': ['MiSans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        mi: {
+                            orange: '#FF6900',
+                            black: '#191919',
+                            bg: '#ffffff',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.03)',
+                        'card': '0 10px 40px -10px rgba(0, 0, 0, 0.05)',
+                        'diffused': '0 20px 40px -15px rgba(0, 0, 0, 0.08)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    },
+                    letterSpacing: {
+                        'tightest': '-.02em',
+                        'wide': '0.01em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            font-weight: 600;
+            src: url('assets/MiSans-Demibold.otf') format('opentype');
+            font-display: swap;
+        }
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+        p { text-wrap: pretty; }
+        .video-wrapper { 
+            transform: translateZ(0); 
+            backface-visibility: hidden; 
+            /* 解决 Safari 圆角问题 */
+            mask-image: -webkit-radial-gradient(white, black);
+        }
+        ::selection { background-color: rgba(255, 105, 0, 0.12); color: #191919; }
+        
+        /* 按钮微光效果 */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+        .btn-shine:hover::after {
+            left: 150%;
+            transition: 0.7s;
+        }
+        /* 自定义标题样式类 */
+        .section-title {
+            font-family: "Noto Serif SC", Georgia, serif;
+            font-weight: 700;
+            color: #191919;
+            letter-spacing: -0.02em;
+            text-align: left;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            padding-top: 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans relative">
+    
+    <!-- Ambient Background Glow (Hero) -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[600px] bg-mi-orange/5 rounded-full blur-[120px] pointer-events-none -z-10 opacity-60"></div>
+        <!-- Navbar -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 w-full bg-transparent border-b border-transparent py-6 transition-all duration-500 ease-in-out">
+        <div class="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
+            <!-- Left: Logo -->
+            <a href="#" class="font-mi-sans text-lg md:text-xl tracking-tight text-mi-black flex items-center gap-1.5 hover:opacity-70 transition-opacity">
+                <span class="font-bold">Xiaomi</span> <span class="font-bold">Robotics</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Header / Hero -->
+    <header class="max-w-4xl mx-auto px-6 pt-36 pb-16 text-center">
+        <!-- <div class="mb-8">
+            <span class="inline-block px-3 py-1 bg-[#FFF0E5] rounded-full text-[11px] font-bold uppercase tracking-[0.2em] text-[#FF6900] cursor-default">Release</span>
+        </div> -->
+        <h1 class="text-3xl md:text-6xl font-sans font-bold text-mi-black mb-8 tracking-tightest leading-[1.1]">
+            Introducing <br class="hidden md:block" /> Xiaomi-Robotics-0
+        </h1>
+        <div class="flex justify-center items-center gap-4 text-sm font-serif text-gray-500 mb-12">
+            <span class="italic">February 12, 2026</span>
+        </div>
+        <!-- 颜色修改：text-gray-600 -> text-black -->
+        <div class="max-w-3xl mx-auto text-lg md:text-xl font-serif text-black leading-loose space-y-6 tracking-wide">
+            <p>
+                Xiaomi-Robotics-0 is an advanced Vision-Language-Action (VLA) model optimized for high performance and real-time execution.
+            </p>
+        </div>
+        
+            <div class="mt-12 flex flex-wrap justify-center items-center gap-4 font-sans text-sm">
+            <!-- 按钮 1: Technical Report -->
+            <a href="assets/paper.pdf" target="_blank" rel="noopener noreferrer" class="group relative px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:bg-white hover:-translate-y-0.5 transition-all duration-300 btn-shine overflow-hidden">
+                <div class="relative z-10 flex items-center gap-2">
+                    <i class="fas fa-file-alt text-gray-400 group-hover:text-mi-orange transition-all duration-300 group-hover:scale-110 text-sm"></i>
+                    <span class="font-medium text-gray-700 group-hover:text-mi-black transition-colors duration-300">Report</span>
+                </div>
+            </a>
+            
+            <!-- 按钮 2: GitHub -->
+            <a href="https://github.com/XiaomiRobotics/Xiaomi-Robotics-0" target="_blank" class="group relative px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:bg-white hover:-translate-y-0.5 transition-all duration-300 btn-shine overflow-hidden">
+                <div class="relative z-10 flex items-center gap-2">
+                    <i class="fab fa-github text-gray-400 group-hover:text-mi-black transition-all duration-300 group-hover:scale-110 text-sm"></i>
+                    <span class="font-medium text-gray-700 group-hover:text-mi-black transition-colors duration-300">Code</span>
+                </div>
+            </a>
+            
+            <!-- 按钮 3: Hugging Face -->
+            <a href="https://huggingface.co/collections/XiaomiRobotics/xiaomi-robotics-0" target="_blank" class="group relative px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:bg-white hover:-translate-y-0.5 transition-all duration-300 btn-shine overflow-hidden">
+                <div class="relative z-10 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-[#FFD21E] transition-all duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM9.5 9C9.5 9.82843 8.82843 10.5 8 10.5C7.17157 10.5 6.5 9.82843 6.5 9C6.5 8.17157 7.17157 7.5 8 7.5C8.82843 7.5 9.5 8.17157 9.5 9ZM17.5 9C17.5 9.82843 16.8284 10.5 16 10.5C15.1716 10.5 14.5 9.82843 14.5 9C14.5 8.17157 15.1716 7.5 16 7.5C16.8284 7.5 17.5 8.17157 17.5 9ZM16.002 14.0019C16.002 14.0019 14.7302 16.5 11.9998 16.5C9.26938 16.5 8.00049 14.0039 8.00049 14.0039C7.75139 13.7196 7.32049 13.6925 7.03613 13.9416C6.75178 14.1907 6.72465 14.6216 6.97375 14.906C6.97375 14.906 8.52737 18.5 11.9998 18.5C15.4722 18.5 17.0278 14.904 17.0278 14.904C17.276 14.6187 17.2474 14.1881 16.962 13.94C16.6766 13.6919 16.246 13.7205 16.002 14.0019Z" />
+                    </svg>
+                    <span class="font-medium text-gray-700 group-hover:text-mi-black transition-colors duration-300">Model</span>
+                </div>
+            </a>
+        </div>
+    </header>
+    
+    <!-- Video Section -->
+    <section class="max-w-5xl mx-auto px-4 md:px-6 mb-12">
+        <div class="video-wrapper p-1 bg-white rounded-2xl shadow-card">
+            <div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden group">
+                <video class="w-full h-full object-cover" poster="https://placehold.co/1200x675/191919/FFFFFF?text=Xiaomi-Robotics-0" controls preload="metadata" playsinline>
+                    <source src="assets/videos/main.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Abstract Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <!-- 这里的 text-black 是目标颜色，其他部分都已改为此颜色 -->
+        <div class="font-serif text-lg text-black leading-loose space-y-6 text-left md:text-justify tracking-wide">
+            <p>
+                We introduce Xiaomi-Robotics-0, an advanced vision-language-action (VLA) model optimized for high performance and fast and smooth real-time execution. The key to our method lies in a carefully designed training recipe and deployment strategy.
+                Xiaomi-Robotics-0 is first pre-trained on a large amount of cross-embodiment robot trajectories and vision-language data, enabling it to acquire broad and generalizable action-generation knowledge while preserving strong VLM capabilities. During post-training and deployment, we employ asynchronous execution techniques to address inference latency, ensuring continuous and seamless real-time rollouts.
+            </p>
+        </div>
+    </section>
+    <!-- 1. Results Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="section-title text-3xl md:text-4xl">Results</h2>
+        <!-- 颜色修改：text-gray-600 -> text-black -->
+        <div class="font-serif text-lg text-black leading-loose mb-10 text-left md:text-justify tracking-wide">
+            <p>
+                Xiaomi-Robotics-0 achieves state-of-the-art performance across three simulation benchmark. Specifically, it achieves an average success rate of 98.7% on LIBERO. On SimplerEnv, it delivers strong performance under Visual Matching (85.5%) , Visual Aggregation (74.7%), and WidowX (79.2%). On CALVIN, it attains an average length of 4.75 and 4.80 on the ABC-D and ABCD-D split, respectively. On VLM benchmarks, our pre-trained model matches the performance of the underlying pre-trained VLM. In real-robot evaluations, Xiaomi-Robotics-0 achieves high success rates and strong throughput on two challenging bimanual manipulation tasks, Lego Disassembly and Towel Folding.
+            </p>
+        </div>
+        <figure class="rounded-xl transition-all duration-500 group overflow-hidden shadow-soft hover:shadow-diffused">
+            <img src="assets/images/performace.png" alt="Performance comparison" class="w-full h-auto rounded-lg transition-transform duration-700 group-hover:scale-[1.005]" loading="lazy">
+        </figure>
+    </section>
+    
+    <!-- 2. Data Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="section-title text-3xl md:text-4xl">Data</h2>
+        <!-- 颜色修改：text-gray-600 -> text-black -->
+        <div class="font-serif text-lg text-black leading-loose space-y-6 text-left md:text-justify tracking-wide">
+            <p>
+                Our training leverages a massive dataset consisting of approximately 200M timesteps of robot trajectories and over 80M samples of general vision-language data. The robot data is sourced from both open-sourced datasets and in-house data collected via teleoperation, including 338 hours for Lego Disassembly and 400 hours for Towel Folding. The VL data is integrated to prevent catastrophic forgetting and enhance visual understanding on robot-centric images.
+            </p>
+        </div>
+        <figure class="rounded-xl transition-all duration-500 group mt-10 overflow-hidden shadow-soft hover:shadow-diffused">
+            <img src="assets/images/data.png" alt="Data distribution" class="w-full h-auto rounded-lg transition-transform duration-700 group-hover:scale-[1.005]" loading="lazy">
+        </figure>
+    </section>
+    <!-- 3. Pre-training Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="section-title text-3xl md:text-4xl">Pre-training</h2>
+        
+        <!-- 颜色修改：text-gray-600 -> text-black -->
+        <div class="font-serif text-lg text-black leading-loose space-y-6 text-left md:text-justify mb-12 tracking-wide">
+            <p>
+                We adopt a architecture comprising a pre-trained VLM (<a href="https://arxiv.org/abs/2511.21631" target="_blank" class="underline hover:no-underline">Qwen3-VL-4B-Instruct</a>) and a Diffusion Transformer (DiT). The VLM processes observation images and language instructions to produce a KV cache. The DiT then generates an action chunk via flow matching, conditioned on the KV cache and the robot proprioceptive state. In total, the model contains 4.7B parameters.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            <!-- Column 1 -->
+            <div class="flex flex-col group">
+                <div class="border-l-[4px] border-mi-orange pl-6 mb-6">
+                    <h4 class="text-xl font-sans font-bold text-mi-black mb-1 tracking-tight">Stage 1</h4>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <p class="text-lg text-black leading-relaxed text-left md:text-justify font-serif mb-6 tracking-wide">
+                    We first endow the VLM with action-generation capabilities using <a href="https://arxiv.org/abs/2512.25072" target="_blank" class="underline hover:no-underline">Choice Policies</a>, accounting for the multimodality of action trajectories. To maintain vision-language capabilities, we mix vision-language data and robot trajectories at a ratio of 1:6.
+                </p>
+                <div class="mt-auto pt-4">
+                    <div class="rounded-2xl overflow-hidden shadow-soft transition-all duration-500 group-hover:shadow-diffused">
+                        <img src="assets/images/pretrain_1.png" alt="VLM Action Scoring Diagram" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.005]">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 2 -->
+            <div class="flex flex-col group">
+                <div class="border-l-[4px] border-mi-orange pl-6 mb-6">
+                    <h4 class="text-xl font-sans font-bold text-mi-black mb-1 tracking-tight">Stage 2</h4>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <p class="text-lg text-black leading-relaxed text-left md:text-justify font-serif mb-6 tracking-wide">
+                    We then freeze the VLM and train the DiT from scratch using a flow-matching loss. The VLM acts as a frozen multimodal conditioner. The DiT learns to generate precise and continuous action chunks conditioned on the VLM's visual-language features and the robot state.
+                </p>
+                <div class="mt-auto pt-4">
+                    <div class="rounded-2xl overflow-hidden shadow-soft transition-all duration-500 group-hover:shadow-diffused">
+                        <img src="assets/images/pretrain_2.png" alt="DiT Flow Matching Diagram" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.005]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 4. Post-training Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="section-title text-3xl md:text-4xl">Post-training</h2>
+        <!-- 颜色修改：text-gray-500 -> text-black -->
+        <div class="font-serif text-lg text-black leading-loose space-y-6 text-left md:text-justify mb-12 tracking-wide">
+            <p>
+                Post-training adapts Xiaomi-Robotics-0 to a specific embodiment. We adopt action prefixing during training to ensure consistency between consecutively predicted action chunks. To ensure reactive and responsive actions, we introduce several techniques to prevent the model from leveraging the temporal correlations between successive actions.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            <!-- LEFT COLUMN -->
+            <div class="flex flex-col group">
+                <div class="border-l-[4px] border-mi-black pl-6 mb-8">
+                    <h4 class="text-xl font-sans font-bold text-mi-black mb-1 tracking-tight">Asynchronous Execution</h4>
+                </div>
+                
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <div class="font-serif text-lg text-black leading-relaxed space-y-6 text-left md:text-justify tracking-wide">
+                    <p>
+                        To enable seamless real-time rollouts, we perform asynchronous execution. The robot executes the remaining actions of the current chunk while simultaneously inferring the next chunk.
+                    </p>
+                    <p>
+                        We condition the next inference by prefixing &Delta;t<sub>c</sub> committed actions from the current chunk. By ensuring that &Delta;t<sub>c</sub> is larger than the inference latency &Delta;t<sub>inf</sub>, we guarantee that there are actions always available for execution.
+                    </p>
+                    <p>
+                       We align the timesteps of consecutive predicted action chunks to ensure continuous rollouts.
+                    </p>
+                    
+                    <div class="bg-[#EFEFEF] border border-gray-100/80 rounded-xl p-6 my-2 shadow-[0_4px_12px_-4px_rgba(105,105,105,0.05)]">
+                        <h5 class="font-sans font-bold text-gray-900 text-base mb-2 flex items-center gap-2">
+                             The Temporal-Correlation Problem
+                        </h5>
+                        <!-- 颜色修改：text-gray-600 -> text-black -->
+                        <p class="text-base text-black leading-relaxed m-0">
+                             Conditioning on previous actions allows the model to exploit the temporal correlation between successive actions. Since successive actions are often similar, policy learning can leverage a shortcut which simply copies the action prefix rather than attending to other signals, resulting in less reactive motion.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 rounded-2xl overflow-hidden shadow-soft transition-all duration-500 group-hover:shadow-diffused">
+                    <img src="assets/images/async.png" alt="Asynchronous Execution Timeline" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.005] grayscale-[5%] group-hover:grayscale-0">
+                </div>
+            </div>
+            <!-- RIGHT COLUMN -->
+            <div class="flex flex-col group">
+                <div class="border-l-[4px] border-mi-orange pl-6 mb-8">
+                    <h4 class="text-xl font-sans font-bold text-mi-black mb-1 tracking-tight">Features</h4>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <div class="font-serif text-lg text-black leading-relaxed space-y-5 text-left md:text-justify tracking-wide">
+                    <div>
+                        <h5 class="font-sans font-bold text-mi-black text-lg mb-3">
+                            1. Adaptive Loss Re-weighting
+                        </h5>
+                        <p>
+                            We re-weight the flow-matching loss based on the L<sub>1</sub> error between online-predicted actions and the ground truth. By assigning higher weights to actions with larger deviations, we penalize the model heavily when it drifts from the ground-truth trajectories.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h5 class="font-sans font-bold text-mi-black text-lg mb-3">
+                            2. &Lambda;-shape Attention Mask
+                        </h5>
+                        <p class="mb-4">
+                            We replace the causal attention mask in DiT with a &Lambda;-shape mask. The noisy action tokens immediately following the prefixed actions can attend to them. Thus, the generated actions can smoothly transition from the action chunk produced by the previous inference. On the other hand, noisy action tokens of later timesteps cannot attend to the action prefix, forcing them to attend to visual and other signals, ensuring reactivity in the generated actions.
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-2">
+                    <div class="rounded-2xl overflow-hidden shadow-soft transition-all duration-500 group-hover:shadow-diffused">
+                        <img src="assets/images/atten_mask.png" alt="Lambda Shape Attention Mask" class="w-full h-auto transition-transform duration-700 group-hover:scale-[1.005] grayscale-[5%] group-hover:grayscale-0">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. Real-World Highlights Section -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="section-title text-3xl md:text-4xl">Highlights</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <!-- Video Card 1 -->
+            <div class="group">
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="assets/videos/积木-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
+                    Our method can disassemble complex Lego assemblies made of up to 20 bricks.
+                </p>
+            </div>
+            <!-- Video Card 2 -->
+            <div class="group">
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="assets/videos/积木-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
+                    Our method adaptively switches grasping motions upon failure.
+                </p>
+            </div>
+            <!-- Video Card 3 -->
+            <div class="group">
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="assets/videos/毛巾-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
+                    When a towel corner is occluded, our method learns to fling the towel with one hand to expose the hidden corner.
+                </p>
+            </div>
+            <!-- Video Card 4 -->
+            <div class="group">
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="assets/videos/毛巾-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <!-- 颜色修改：text-gray-600 -> text-black -->
+                <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
+                    When two towels are picked out, our method puts the extra towel back before beginning the folding process.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- Citation -->
+    <section class="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
+        <h2 class="text-sm font-sans font-bold text-gray-900 uppercase tracking-[0.2em] mb-6">Citation</h2>
+        <div class="bg-[#FAFAFA] border-l-4 border-mi-orange rounded-r-xl p-6 font-mono text-sm text-gray-700 leading-relaxed relative group shadow-sm">
+            <pre class="m-0 whitespace-pre-wrap break-words" id="bibtex-content">
+@article{robotics2026xiaomi,
+  title        = {Xiaomi-Robotics-0: An Open-Sourced Vision-Language-ActionModel with Real-Time Execution},
+  author       = {Xiaomi Robotics},
+  journal      = {arXiv preprint},
+  year         = {2026}
+}
+            </pre>
+            <button id="copyBtn" class="absolute top-4 right-4 px-4 py-2 bg-white border border-gray-200 hover:border-mi-orange hover:text-mi-orange text-xs font-bold text-gray-500 rounded-lg transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none shadow-sm" onclick="copyCitation(this)">
+                Copy
+            </button>
+        </div>
+    </section>
+    
+    <footer class="border-t border-gray-100 bg-white py-16">
+        <div class="max-w-4xl mx-auto px-6">
+            <p class="text-center text-xs text-gray-400 font-serif">
+                © 2026 Xiaomi Robotics. All rights reserved.
+            </p>
+        </div>
+    </footer>
+    <script>
+    function copyCitation(btn) {
+        const codeEl = document.getElementById('bibtex-content');
+        const originalText = btn.textContent;
+        navigator.clipboard.writeText(codeEl.innerText.trim()).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.remove('text-gray-500', 'bg-white', 'border-gray-200');
+            btn.classList.add('bg-green-50', 'border-green-200', 'text-green-700');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.classList.remove('bg-green-50', 'border-green-200', 'text-green-700');
+                btn.classList.add('text-gray-500', 'bg-white', 'border-gray-200');
+            }, 2000);
+        }).catch(() => {
+            btn.textContent = 'Error';
+        });
+    }
+    // 导航栏动态效果 Script
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 30) {
+            // 滚动后：模糊背景，显示边框，减小Padding (py-4)，增加阴影
+            nav.classList.add('bg-[#ffffff]/90', 'backdrop-blur-xl', 'border-gray-100', 'shadow-sm', 'py-4');
+            nav.classList.remove('bg-transparent', 'border-transparent', 'py-6');
+        } else {
+            // 初始：透明背景，无边框，大Padding (py-6)
+            nav.classList.remove('bg-[#ffffff]/90', 'backdrop-blur-xl', 'border-gray-100', 'shadow-sm', 'py-4');
+            nav.classList.add('bg-transparent', 'border-transparent', 'py-6');
+        }
+    });
+    </script>
+</body>
+</html>
