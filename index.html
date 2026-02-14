@@ -96,15 +96,6 @@
             line-height: 1.2;
             padding-top: 0.5rem;
         }
-        
-        /* 播放按钮自定义动画 */
-        .play-overlay:hover .play-icon-bg {
-            transform: scale(1.1);
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-        .play-overlay:hover .play-icon {
-            color: #FF6900;
-        }
     </style>
 </head>
 <body class="font-sans relative">
@@ -165,36 +156,16 @@
                     <span class="font-medium text-gray-700 group-hover:text-mi-black transition-colors duration-300">Model</span>
                 </div>
             </a>
-            <!-- 按钮 4: Video (New) -->
-            <a href="assets/videos/main.mp4" target="_blank" class="group relative px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/60 rounded-2xl shadow-[0_4px_12px_-2px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)] hover:border-gray-300 hover:bg-white hover:-translate-y-0.5 transition-all duration-300 btn-shine overflow-hidden">
-                <div class="relative z-10 flex items-center gap-2">
-                    <i class="fas fa-play text-gray-400 group-hover:text-mi-orange transition-all duration-300 group-hover:scale-110 text-sm"></i>
-                    <span class="font-medium text-gray-700 group-hover:text-mi-black transition-colors duration-300">Video</span>
-                </div>
-            </a>
         </div>
     </header>
     
     <!-- Video Section -->
     <section class="max-w-5xl mx-auto px-4 md:px-6 mb-12">
         <div class="video-wrapper p-1 bg-white rounded-2xl shadow-card">
-            <!-- 容器添加 ID 和 onclick 事件 -->
-            <div id="video-main" 
-                 class="relative aspect-video w-full bg-black rounded-xl overflow-hidden group cursor-pointer"
-                 onclick="loadBiliVideo(this, 'BV1N5cqzaEb8')">
-                
-                <!-- 封面图 (Poster) -->
-                <img src="https://placehold.co/1200x675/191919/FFFFFF?text=Xiaomi-Robotics-0" 
-                     alt="Cover" 
-                     class="absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300 group-hover:opacity-80">
-                
-                <!-- 播放按钮遮罩 -->
-                <div class="play-overlay absolute inset-0 z-20 flex items-center justify-center">
-                    <div class="play-icon-bg w-16 h-16 md:w-20 md:h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 border border-white/30">
-                        <i class="play-icon fas fa-play text-white text-2xl md:text-3xl ml-1 transition-colors duration-300"></i>
-                    </div>
-                </div>
-
+            <div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden group">
+                <video class="w-full h-full object-cover" poster="https://placehold.co/1200x675/191919/FFFFFF?text=Xiaomi-Robotics-0" controls preload="metadata" playsinline>
+                    <source src="https://robotics.xiaomi.com/robot-model/xiaomi-robotics-0.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
     </section>
@@ -366,15 +337,10 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <!-- Video Card 1 -->
             <div class="group">
-                <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft relative cursor-pointer" onclick="loadBiliVideo(this, 'BV1P5cqzaEkH')">
-                    <!-- 极简封面: 深色背景 + 播放按钮 -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
-                    <!-- 播放按钮遮罩 -->
-                    <div class="play-overlay absolute inset-0 z-20 flex items-center justify-center">
-                        <div class="play-icon-bg w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 border border-white/20">
-                            <i class="play-icon fas fa-play text-white text-xl ml-1 transition-colors duration-300"></i>
-                        </div>
-                    </div>
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="https://robotics.xiaomi.com/robot-model/xiaomi-robotics-0-Lego-disassembly-complex-task-manipulation.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
                     Our method can disassemble complex Lego assemblies made of up to 20 bricks.
@@ -382,14 +348,10 @@
             </div>
             <!-- Video Card 2 -->
             <div class="group">
-                <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft relative cursor-pointer" onclick="loadBiliVideo(this, 'BV1N5cqzaE4B')">
-                     <!-- 极简封面 -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
-                    <div class="play-overlay absolute inset-0 z-20 flex items-center justify-center">
-                        <div class="play-icon-bg w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 border border-white/20">
-                            <i class="play-icon fas fa-play text-white text-xl ml-1 transition-colors duration-300"></i>
-                        </div>
-                    </div>
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="https://robotics.xiaomi.com/robot-model/xiaomi-robotics-0-Lego-disassembly-flexible-%20motion-switch.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <!-- 颜色修改：text-gray-600 -> text-black -->
                 <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
@@ -398,14 +360,10 @@
             </div>
             <!-- Video Card 3 -->
             <div class="group">
-                <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft relative cursor-pointer" onclick="loadBiliVideo(this, 'BV1AEcqzfEsC')">
-                     <!-- 极简封面 -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
-                    <div class="play-overlay absolute inset-0 z-20 flex items-center justify-center">
-                        <div class="play-icon-bg w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 border border-white/20">
-                            <i class="play-icon fas fa-play text-white text-xl ml-1 transition-colors duration-300"></i>
-                        </div>
-                    </div>
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="https://robotics.xiaomi.com/robot-model/xiaomi-robotics-0-towel-folding-fling.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <!-- 颜色修改：text-gray-600 -> text-black -->
                 <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
@@ -414,14 +372,10 @@
             </div>
             <!-- Video Card 4 -->
             <div class="group">
-                <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft relative cursor-pointer" onclick="loadBiliVideo(this, 'BV1AEcqzfE84')">
-                     <!-- 极简封面 -->
-                    <div class="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 z-10 transition-opacity duration-300 group-hover:opacity-90"></div>
-                    <div class="play-overlay absolute inset-0 z-20 flex items-center justify-center">
-                        <div class="play-icon-bg w-14 h-14 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 border border-white/20">
-                            <i class="play-icon fas fa-play text-white text-xl ml-1 transition-colors duration-300"></i>
-                        </div>
-                    </div>
+                <div class="bg-black rounded-xl overflow-hidden aspect-video mb-4 video-wrapper shadow-soft">
+                    <video class="w-full h-full object-cover" controls muted loop playsinline preload="metadata">
+                        <source src="https://robotics.xiaomi.com/robot-model/xiaomi-robotics-0-towel-folding-put-back.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <!-- 颜色修改：text-gray-600 -> text-black -->
                 <p class="font-serif text-black leading-relaxed text-sm md:text-base text-left md:text-justify tracking-wide">
@@ -456,30 +410,6 @@
         </div>
     </footer>
     <script>
-    // 动态加载 Bilibili 视频的函数
-    function loadBiliVideo(container, bvid) {
-        // 创建 iframe 元素
-        const iframe = document.createElement('iframe');
-        // autoplay=1 确保点击封面后视频直接播放
-        // danmaku=0 关闭弹幕
-        // high_quality=1 确保高清
-        iframe.src = `//player.bilibili.com/player.html?bvid=${bvid}&page=1&high_quality=1&danmaku=0&autoplay=1`;
-        iframe.setAttribute('class', 'w-full h-full absolute top-0 left-0');
-        iframe.setAttribute('scrolling', 'no');
-        iframe.setAttribute('border', '0');
-        iframe.setAttribute('frameborder', 'no');
-        iframe.setAttribute('framespacing', '0');
-        iframe.setAttribute('allowfullscreen', 'true');
-        
-        // 清空容器（移除封面图和播放按钮）
-        container.innerHTML = '';
-        // 插入 iframe
-        container.appendChild(iframe);
-        // 移除 onclick 事件防止重复点击
-        container.removeAttribute('onclick');
-        container.classList.remove('cursor-pointer');
-    }
-
     function copyCitation(btn) {
         const codeEl = document.getElementById('bibtex-content');
         const originalText = btn.textContent;
